@@ -1,0 +1,64 @@
+: 32_0
+1 JUMP ;
+: 32_7
+
+1 LINE.NUM
+  ~R5   OFF
+
+2 LINE.NUM
+  ^R5_off   StartTimer
+4 JUMP ;
+: 32_11
+
+1 LINE.NUM
+  3600.0  
+  ^R5_off   SetTimer
+
+2 LINE.NUM
+  30.0  
+  ^R5_on   SetTimer
+0 JUMP ;
+: 32_12
+
+1 LINE.NUM
+  ~R5   ON
+
+2 LINE.NUM
+  ^R5_on   StartTimer
+3 JUMP ;
+: 32_15
+
+1 LINE.NUM
+  10    DELAY
+1 JUMP ;
+: 32_16
+
+1 LINE.NUM
+  10    DELAY
+1 JUMP ;
+: 32_6
+TRUE
+
+1 LINE.NUM
+  ^R5_off   T0=
+LAND
+IF -5 ELSE -3 THEN JUMP ;
+: 32_9
+FALSE
+
+1 LINE.NUM
+  ^R5_on   T0=
+LOR
+IF -7 ELSE -3 THEN JUMP ;
+T: T32
+DUMMY
+32_0
+32_7
+32_11
+32_12
+32_15
+32_16
+32_6
+32_9
+T;
+&Recirculation5 ' T32 SETTASK

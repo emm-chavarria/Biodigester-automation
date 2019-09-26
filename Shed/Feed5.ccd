@@ -1,0 +1,67 @@
+: 15_0
+2 JUMP ;
+: 15_9
+
+1 LINE.NUM
+  ~F5   ON
+
+2 LINE.NUM
+  ^F5_on   StartTimer
+5 JUMP ;
+: 15_10
+
+1 LINE.NUM
+  ~F5   OFF
+
+2 LINE.NUM
+  ^F5_off   StartTimer
+3 JUMP ;
+: 15_12
+
+1 LINE.NUM
+  ^D5_Feed @@ 
+  7.03    F/
+  ^F5_day @! 
+
+2 LINE.NUM
+  10    DELAY
+
+3 LINE.NUM
+  ^F5_day @@ 
+  ^F5_pulses @@   F/
+  ^F5_on @! 
+0 JUMP ;
+: 15_14
+1 LINE.NUM 24 I>F ^F5_pulses @@ F/ 3600 I>F F* ^F5_off @! 
+-4 JUMP ;
+: 15_17
+
+1 LINE.NUM
+  10    DELAY
+0 JUMP ;
+: 15_8
+TRUE
+
+1 LINE.NUM
+  ^F5_off   T0=
+LAND
+IF -4 ELSE -2 THEN JUMP ;
+: 15_11
+TRUE
+
+1 LINE.NUM
+  ^F5_on   T0=
+LAND
+IF -6 ELSE -1 THEN JUMP ;
+T: T15
+DUMMY
+15_0
+15_9
+15_10
+15_12
+15_14
+15_17
+15_8
+15_11
+T;
+&Feed5 ' T15 SETTASK

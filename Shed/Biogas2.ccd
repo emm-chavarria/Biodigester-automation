@@ -1,0 +1,31 @@
+: 35_0
+2 JUMP ;
+: 35_4
+
+1 LINE.NUM
+  10    DELAY
+1 JUMP ;
+: 35_7
+
+1 LINE.NUM
+  ^FM2_counts   1+@!
+
+2 LINE.NUM
+  3.0    FDELAY
+0 JUMP ;
+: 35_8
+TRUE
+
+1 LINE.NUM
+  ~FM2 @@ 
+  -0.1    F<
+LAND
+IF -2 ELSE -3 THEN JUMP ;
+T: T35
+DUMMY
+35_0
+35_4
+35_7
+35_8
+T;
+&Biogas2 ' T35 SETTASK

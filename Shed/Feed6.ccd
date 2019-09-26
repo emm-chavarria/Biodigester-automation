@@ -1,0 +1,67 @@
+: 16_0
+0 JUMP ;
+: 16_1
+
+1 LINE.NUM
+  ^D6_Feed @@ 
+  6.22    F/
+  ^F6_day @! 
+
+2 LINE.NUM
+  10    DELAY
+
+3 LINE.NUM
+  ^F6_day @@ 
+  ^F6_pulses @@   F/
+  ^F6_on @! 
+2 JUMP ;
+: 16_3
+
+1 LINE.NUM
+  ~F6   OFF
+
+2 LINE.NUM
+  ^F6_off   StartTimer
+4 JUMP ;
+: 16_4
+
+1 LINE.NUM
+  ~F6   ON
+
+2 LINE.NUM
+  ^F6_on   StartTimer
+2 JUMP ;
+: 16_14
+1 LINE.NUM 24 I>F ^F6_pulses @@ F/ 3600 I>F F* ^F6_off @! 
+-2 JUMP ;
+: 16_17
+
+1 LINE.NUM
+  10    DELAY
+1 JUMP ;
+: 16_2
+TRUE
+
+1 LINE.NUM
+  ^F6_on   T0=
+LAND
+IF -5 ELSE -1 THEN JUMP ;
+: 16_5
+TRUE
+
+1 LINE.NUM
+  ^F6_off   T0=
+LAND
+IF -7 ELSE -3 THEN JUMP ;
+T: T16
+DUMMY
+16_0
+16_1
+16_3
+16_4
+16_14
+16_17
+16_2
+16_5
+T;
+&Feed6 ' T16 SETTASK

@@ -1,0 +1,67 @@
+: 14_0
+0 JUMP ;
+: 14_1
+
+1 LINE.NUM
+  ^D4_Feed @@ 
+  6.97    F/
+  ^F4_day @! 
+
+2 LINE.NUM
+  10    DELAY
+
+3 LINE.NUM
+  ^F4_day @@ 
+  ^F4_pulses @@   F/
+  ^F4_on @! 
+2 JUMP ;
+: 14_3
+
+1 LINE.NUM
+  ~F4   OFF
+
+2 LINE.NUM
+  ^F4_off   StartTimer
+4 JUMP ;
+: 14_4
+
+1 LINE.NUM
+  ~F4   ON
+
+2 LINE.NUM
+  ^F4_on   StartTimer
+2 JUMP ;
+: 14_14
+1 LINE.NUM 24 I>F ^F4_pulses @@ F/ 3600 I>F F* ^F4_off @! 
+-2 JUMP ;
+: 14_17
+
+1 LINE.NUM
+  10    DELAY
+1 JUMP ;
+: 14_2
+TRUE
+
+1 LINE.NUM
+  ^F4_on   T0=
+LAND
+IF -5 ELSE -1 THEN JUMP ;
+: 14_5
+TRUE
+
+1 LINE.NUM
+  ^F4_off   T0=
+LAND
+IF -7 ELSE -3 THEN JUMP ;
+T: T14
+DUMMY
+14_0
+14_1
+14_3
+14_4
+14_14
+14_17
+14_2
+14_5
+T;
+&Feed4 ' T14 SETTASK

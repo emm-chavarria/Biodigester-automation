@@ -1,0 +1,64 @@
+: 30_0
+1 JUMP ;
+: 30_2
+
+1 LINE.NUM
+  ~R4   ON
+
+2 LINE.NUM
+  ^R4_on   StartTimer
+4 JUMP ;
+: 30_3
+
+1 LINE.NUM
+  3600.0  
+  ^R4_off   SetTimer
+
+2 LINE.NUM
+  30.0  
+  ^R4_on   SetTimer
+-2 JUMP ;
+: 30_7
+
+1 LINE.NUM
+  ~R4   OFF
+
+2 LINE.NUM
+  ^R4_off   StartTimer
+3 JUMP ;
+: 30_15
+
+1 LINE.NUM
+  10    DELAY
+2 JUMP ;
+: 30_16
+
+1 LINE.NUM
+  10    DELAY
+0 JUMP ;
+: 30_5
+FALSE
+
+1 LINE.NUM
+  ^R4_on   T0=
+LOR
+IF -4 ELSE -2 THEN JUMP ;
+: 30_8
+TRUE
+
+1 LINE.NUM
+  ^R4_off   T0=
+LAND
+IF -6 ELSE -4 THEN JUMP ;
+T: T30
+DUMMY
+30_0
+30_2
+30_3
+30_7
+30_15
+30_16
+30_5
+30_8
+T;
+&Recirculation4 ' T30 SETTASK

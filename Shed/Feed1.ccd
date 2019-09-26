@@ -1,0 +1,67 @@
+: 12_0
+0 JUMP ;
+: 12_1
+
+1 LINE.NUM
+  ^D1_Feed @@ 
+  4.18    F/
+  ^F1_day @! 
+
+2 LINE.NUM
+  10    DELAY
+
+3 LINE.NUM
+  ^F1_day @@ 
+  ^F1_pulses @@   F/
+  ^F1_on @! 
+2 JUMP ;
+: 12_3
+
+1 LINE.NUM
+  ~F1   OFF
+
+2 LINE.NUM
+  ^F1_off   StartTimer
+4 JUMP ;
+: 12_4
+
+1 LINE.NUM
+  ~F1   ON
+
+2 LINE.NUM
+  ^F1_on   StartTimer
+2 JUMP ;
+: 12_14
+1 LINE.NUM 24 I>F ^F1_pulses @@ F/ 3600 I>F F* ^F1_off @! 
+-2 JUMP ;
+: 12_17
+
+1 LINE.NUM
+  10    DELAY
+1 JUMP ;
+: 12_2
+TRUE
+
+1 LINE.NUM
+  ^F1_on   T0=
+LAND
+IF -5 ELSE -1 THEN JUMP ;
+: 12_5
+TRUE
+
+1 LINE.NUM
+  ^F1_off   T0=
+LAND
+IF -7 ELSE -3 THEN JUMP ;
+T: T12
+DUMMY
+12_0
+12_1
+12_3
+12_4
+12_14
+12_17
+12_2
+12_5
+T;
+&Feed1 ' T12 SETTASK

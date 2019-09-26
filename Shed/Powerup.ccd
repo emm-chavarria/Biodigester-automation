@@ -1,0 +1,207 @@
+: 0_0
+1 JUMP ;
+: 0_1
+
+1 LINE.NUM
+  &Biogas1   START.T
+  ^status_Biogas1 I@! 
+
+2 LINE.NUM
+  &Biogas2   START.T
+  ^status_Biogas2 I@! 
+
+3 LINE.NUM
+  &Biogas3   START.T
+  ^status_Biogas3 I@! 
+
+4 LINE.NUM
+  &Biogas4   START.T
+  ^status_Biogas4 I@! 
+
+5 LINE.NUM
+  &Biogas5   START.T
+  ^status_Biogas5 I@! 
+
+6 LINE.NUM
+  &Biogas6   START.T
+  ^status_Biogas6 I@! 
+
+7 LINE.NUM
+  &Feed1   START.T
+  ^status_Feed1 @! 
+
+8 LINE.NUM
+  &Feed2   START.T
+  ^status_Feed2 @! 
+
+9 LINE.NUM
+  &Feed3   START.T
+  ^status_Feed3 @! 
+
+10 LINE.NUM
+  &Feed4   START.T
+  ^status_Feed4 @! 
+
+11 LINE.NUM
+  &Feed5   START.T
+  ^status_Feed5 @! 
+
+12 LINE.NUM
+  &Feed6   START.T
+  ^status_Feed6 @! 
+
+13 LINE.NUM
+  &Probes   START.T
+  ^status_Probes @! 
+
+14 LINE.NUM
+  &Data_logging   START.T
+  ^status_Data_logging @! 
+
+15 LINE.NUM
+  &Recirculation1   START.T
+  ^status_Recirculation1 @! 
+
+16 LINE.NUM
+  &Recirculation2   START.T
+  ^status_Recirculation2 @! 
+
+17 LINE.NUM
+  &Recirculation3   START.T
+  ^status_Recirculation3 @! 
+
+18 LINE.NUM
+  &Recirculation4   START.T
+  ^status_Recirculation4 @! 
+
+19 LINE.NUM
+  &Recirculation5   START.T
+  ^status_Recirculation5 @! 
+
+20 LINE.NUM
+  &Recirculation6   START.T
+  ^status_Recirculation6 @! 
+3 JUMP ;
+: 0_3
+
+1 LINE.NUM
+  %Shed   ENABLE
+
+2 LINE.NUM
+ -1 E/DAllPoints
+0 JUMP ;
+: 0_12
+TRUE
+
+1 LINE.NUM
+  %Shed    ENABLE@
+LAND
+
+2 LINE.NUM
+ PTS.ENABLED?
+LAND
+IF 0 ELSE -2 THEN JUMP ;
+: 0_16
+TRUE
+
+1 LINE.NUM
+  %Shed   BoardReady? 0=
+LAND
+
+2 LINE.NUM
+ PTS.ENABLED?
+LAND
+IF -4 ELSE -3 THEN JUMP ;
+: 0_21
+TRUE
+
+1 LINE.NUM
+  &Biogas1   ?RUNNING
+LAND
+
+2 LINE.NUM
+  &Biogas2   ?RUNNING
+LAND
+
+3 LINE.NUM
+  &Biogas3   ?RUNNING
+LAND
+
+4 LINE.NUM
+  &Biogas4   ?RUNNING
+LAND
+
+5 LINE.NUM
+  &Biogas5   ?RUNNING
+LAND
+
+6 LINE.NUM
+  &Biogas6   ?RUNNING
+LAND
+
+7 LINE.NUM
+  &Feed1   ?RUNNING
+LAND
+
+8 LINE.NUM
+  &Feed2   ?RUNNING
+LAND
+
+9 LINE.NUM
+  &Feed3   ?RUNNING
+LAND
+
+10 LINE.NUM
+  &Feed4   ?RUNNING
+LAND
+
+11 LINE.NUM
+  &Feed5   ?RUNNING
+LAND
+
+12 LINE.NUM
+  &Feed6   ?RUNNING
+LAND
+
+13 LINE.NUM
+  &Recirculation1   ?RUNNING
+LAND
+
+14 LINE.NUM
+  &Recirculation2   ?RUNNING
+LAND
+
+15 LINE.NUM
+  &Recirculation3   ?RUNNING
+LAND
+
+16 LINE.NUM
+  &Recirculation4   ?RUNNING
+LAND
+
+17 LINE.NUM
+  &Recirculation5   ?RUNNING
+LAND
+
+18 LINE.NUM
+  &Recirculation6   ?RUNNING
+LAND
+
+19 LINE.NUM
+  &Probes   ?RUNNING
+LAND
+
+20 LINE.NUM
+  &Data_logging   ?RUNNING
+LAND
+IF 0 ELSE -5 THEN JUMP ;
+T: T0
+DUMMY
+0_0
+0_1
+0_3
+0_12
+0_16
+0_21
+T;
+&Powerup ' T0 SETTASK
